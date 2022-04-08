@@ -1,19 +1,48 @@
-const express = require('express')
-const app = express()
-es6Renderer = require('express-es6-template-engine')
-const forbiddenChars = [
+
+// const forbidden = require('./resources/forbidden');
+const forbidden = [
+    "parseInt",
+    "document.write",
+    "eval",
+    "isNaN",
+    "unescape",
+    "escape",
+    "parseFloat",
+    "parseInt",
+    "eval",
+    "isNaN",
+    "onload",
     "alert",
     "script",
     "<",
     ">",
-    ""
+    "onload",
+    "=",
+    "(",
+    ")",
+    '"'
+
 ]
+const express = require('express')
+const app = express()
+es6Renderer = require('express-es6-template-engine')
+
+reemplazarTodos = (palabra,reemplazar) =>{
+
+    while(palabra.includes(reemplazar)){
+        console.log(`Se ha reemplazado ${reemplazar} en ${palabra}`)
+        palabra = palabra.replace(reemplazar,'')
+    }
+    return palabra
+}
+
 limpiarRequest = (data) =>{
-    forbiddenChars.forEach(word => {
+    
+    forbidden.forEach(word => {
         var usuario = data.usuario
         var password = data.password 
-        usuario = usuario.replace(word,'')
-        password = password.replace(word,'')
+        usuario = reemplazarTodos(usuario,word)
+        password = reemplazarTodos(password,word)
         data = {
             usuario,
             password
