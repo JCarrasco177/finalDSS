@@ -3,11 +3,11 @@ const forbidden = [
     "parseFloat", "parseInt", "eval", "isNaN", "onload", "alert", "script",
     "<",  ">", "onload", "=", "(", ")", '"' ,"'" ,"/"]
 
-exports.getForbidden = () =>{
+const getForbidden = () =>{
     return forbidden
 }
 
-reemplazarTodos = (palabra,reemplazar) =>{
+const reemplazarTodos = (palabra,reemplazar) =>{
 
     while(palabra.includes(reemplazar)){
         console.log(`Se ha reemplazado ${reemplazar} en ${palabra}`)
@@ -16,7 +16,7 @@ reemplazarTodos = (palabra,reemplazar) =>{
     return palabra
 }
 
-exports.limpiarRequest = (data) =>{
+ const limpiarRequest = (data) =>{
     
     forbidden.forEach(word => {
         var usuario = data.usuario
@@ -30,6 +30,11 @@ exports.limpiarRequest = (data) =>{
     })
     return data
     
+}
+module.exports = {
+    getForbidden,
+    reemplazarTodos,
+    limpiarRequest,
 }
 
 
