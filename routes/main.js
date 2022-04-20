@@ -5,6 +5,8 @@ const main = require('../controllers/MainController')
 
 //Rutas
 router.get('/index',main.getIndex)
+router.get('/post',main.getPost)
 router.post('/login',main.setLogin)
+router.post('/setpost',main.setPost)
 
 module.exports = router;
