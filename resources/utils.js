@@ -6,7 +6,13 @@ const forbidden = [
 const getForbidden = () =>{
     return forbidden
 }
+const btoa = (text) => {
+    return Buffer.from(text, 'binary').toString('base64');
+};
 
+const atob = (base64) => {
+    return Buffer.from(base64, 'base64').toString('binary');
+};
 const reemplazarTodos = (palabra,reemplazar) =>{
 
     while(palabra.includes(reemplazar)){
@@ -35,6 +41,8 @@ module.exports = {
     getForbidden,
     reemplazarTodos,
     limpiarRequest,
+    btoa,
+    atob,
 }
 
 
