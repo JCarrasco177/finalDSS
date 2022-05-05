@@ -14,5 +14,6 @@ router.get('/testmysql',users.testMysql)
 router.post('/createuser',users.createUser)
 router.post('/getuserbyid',users.getUserById)
 router.post('/login',users.setLogin)
+router.get('/avatar',users.getAvatar)
 
 module.exports = router;

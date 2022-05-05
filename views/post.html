@@ -16,7 +16,12 @@
             <img src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Bootstrap
           </a>
+          <span class="navbar-text">
+            <!-- <img src = 'img/avatar.png' width="40" height="40"/> -->
+            <p>${user.name} ${user.lastname}</p>
+          </span>
         </div>
+        
       </nav>
     <div class = "container">
         <div class="card" >
@@ -39,23 +44,29 @@
             <div class="card-body">
               <h5 class="card-title">Comentarios</h5>
               <div class="form-floating">
+                <input type="text" class="form-control" id="title"  name="title"
+                placeholder="" value="">
+                <label for="title">Titulo</label>
+              </div> 
+              <div class="form-floating">
                 <textarea class="form-control" placeholder="Leave a comment here" 
                 id="comentario" name="comentario" style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Ingrese su Comentario</label>
               </div>
               <div class="form-floating">
+                <input value="${user.id}" id = "user_id" hidden>
                 <input type="text" class="form-control" id="nombre" name="nombre"
-                placeholder="Ingrese su nombre" value="">
+                placeholder="Ingrese su nombre" value=" ${user.name} ${user.lastname}" disabled>
                 <label for="floatingInputGrid">Nombre</label>
               </div>
               <div class="form-floating">
                 <input type="email" class="form-control" id="email" name = "email" 
-                placeholder="name@example.com" value="">
+                placeholder="name@example.com" value="${user.email}" disabled>
                 <label for="floatingInputGrid">Email address</label>
               </div>
               <div class="form-floating">
                 <input type="text" class="form-control" id="web" id="web" name="web"
-                placeholder="www.example.com" value="" pattern="(http:|https:).+">
+                placeholder="www.example.com" value="${user.web_page}" pattern="(http:|https:).+" disabled>
                 <label for="floatingInputGrid">Sitio Web</label>
               </div> 
               <br>

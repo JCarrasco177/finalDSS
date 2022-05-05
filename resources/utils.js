@@ -16,7 +16,7 @@ const atob = (base64) => {
 const reemplazarTodos = (palabra,reemplazar) =>{
 
     while(palabra.includes(reemplazar)){
-        console.log(`Se ha reemplazado ${reemplazar} en ${palabra}`)
+        //console.log(`Se ha reemplazado ${reemplazar} en ${palabra}`)
         palabra = palabra.replace(reemplazar,'')
     }
     return palabra

@@ -2,7 +2,7 @@ const utils = require('../resources/utils')
 const moment = require('moment')
 
 const getIndex = (request,response) =>{
-    response.render('index');
+    response.render('index', {locals:{message :'""'}});
 }
 var posts = [
     ]
