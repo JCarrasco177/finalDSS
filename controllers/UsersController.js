@@ -23,7 +23,6 @@ const createUser = (request,response)=>{
 
         }
       );
-  
 }
 const getUserById = (request,response)=>{
   
@@ -40,15 +39,22 @@ const setLogin  = (request,response) =>{
         usuario: request.body.usuario,
         password: request.body.password
     })
-    console.log('SELECT * FROM users where name ="'+usuario.usuario+'" and password = "'+utils.btoa(usuario.password)+'"')
+    
     connection.query(
         'SELECT * FROM users where name ="'+usuario.usuario+'" and password = "'+utils.btoa(usuario.password)+'"',
-        function(err, results, fields) {
+        function(err, userResult, fields) {
 
-            const posts = []
-             if(results.length >0){
-                const user = results[0]
-                response.render('post',{locals:{user,posts}});
+             var posts = []
+            
+             if(userResult.length >0){
+                const user = userResult[0]
+                connection.query("select * from posts where user_id = "+userResult[0].id ,
+                function(err, postResult, fields) {
+                    posts = postResult
+                }
+            );
+                message = {message:'""'}
+                response.render('post',{locals:{user,posts,message}});
             }else{
                 response.render('index',{
                     locals: {message:"'No existen coincidencias en la base de datos'"}
