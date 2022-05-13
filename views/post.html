@@ -10,7 +10,7 @@
     <title>Login</title>
     <script>
     window.onload = () =>{
-          var message = ${message.message}
+          var message = ${message}
           console.log('El mensaje es :'+message)
           if (message != ''){
             document.getElementById('error').innerHTML = message
@@ -39,14 +39,54 @@
         </div>
         
       </nav>
-    <div class = "container">
+      <div class = "container">
+      <div class="card" >
+        <form action="http://localhost:3000/setPost" method = "POST">
+        <input value="${user.id}" id = "user_id" name = "user_id" hidden>
+        <div class="card-body">
+          <h5 class="card-title">Comentarios</h5>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="title"  name="title"
+            placeholder="" value="">
+            <label for="title">Titulo</label>
+          </div> 
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" 
+            id="content" name="content" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Ingrese su Comentario</label>
+          </div>
+          <div class="form-floating">
+            
+            <input type="text" class="form-control" id="nombre" name="nombre"
+            placeholder="Ingrese su nombre" value=" ${user.name} ${user.lastname}" disabled>
+            <label for="floatingInputGrid">Nombre</label>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email" name = "email" 
+            placeholder="name@example.com" value="${user.email}" disabled>
+            <label for="floatingInputGrid">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="web" id="web" name="web"
+            placeholder="www.example.com" value="${user.web_page}" pattern="(http:|https:).+" disabled>
+            <label for="floatingInputGrid">Sitio Web</label>
+          </div> 
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="alert alert-danger" role="alert" id = "error">
+            
+          </div>
+        </div>
+    </form>
+    </div>  
+   
         <div class="card" >
             <div class="card-body">
                 <h5 class="card-title">Comments</h5>
                 <div class="row">
                 ${posts.map(post => `
-                  <div class="col">${post.nombre}</div>
-                  <div class="col">${post.fecha}</div>
+                  <div class="col">${post.title}</div>
+                  <div class="col">${post.fixedate}</div>
                   <div class="col">${post.email}</div>
                   <div class="col"><a href=${post.web} >WEB</a></a></div>
                   <p class="card-text">${post.comentario}</p>
@@ -55,44 +95,7 @@
             </div>
         </div>
         
-        <div class="card" >
-            <form action="/setPost" method = "POST">
-            <div class="card-body">
-              <h5 class="card-title">Comentarios</h5>
-              <div class="form-floating">
-                <input type="text" class="form-control" id="title"  name="title"
-                placeholder="" value="">
-                <label for="title">Titulo</label>
-              </div> 
-              <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" 
-                id="comentario" name="comentario" style="height: 100px"></textarea>
-                <label for="floatingTextarea2">Ingrese su Comentario</label>
-              </div>
-              <div class="form-floating">
-                <input value="${user.id}" id = "user_id" hidden>
-                <input type="text" class="form-control" id="nombre" name="nombre"
-                placeholder="Ingrese su nombre" value=" ${user.name} ${user.lastname}" disabled>
-                <label for="floatingInputGrid">Nombre</label>
-              </div>
-              <div class="form-floating">
-                <input type="email" class="form-control" id="email" name = "email" 
-                placeholder="name@example.com" value="${user.email}" disabled>
-                <label for="floatingInputGrid">Email address</label>
-              </div>
-              <div class="form-floating">
-                <input type="text" class="form-control" id="web" id="web" name="web"
-                placeholder="www.example.com" value="${user.web_page}" pattern="(http:|https:).+" disabled>
-                <label for="floatingInputGrid">Sitio Web</label>
-              </div> 
-              <br>
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <div class="alert alert-danger" role="alert" id = "error">
-                
-              </div>
-            </div>
-        </form>
-        </div>
+        
     </div>
     
   </body>
