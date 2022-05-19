@@ -39,26 +39,14 @@ const setLogin  = (request,response) =>{
         usuario: request.body.usuario,
         password: request.body.password
     })
-    
     connection.query(
         'SELECT * FROM users where name ="'+usuario.usuario+'" and password = "'+utils.btoa(usuario.password)+'"',
         function(err, userResult, fields) {
-
-             var posts = []
-            
              if(userResult.length >0){
                 const user = userResult[0]
-                connection.query("select * from posts where user_id = "+userResult[0].id ,
-                function(err, postResult, fields) {
-                    posts = postResult
-                }
-            );
-                message = {message:'""'}
-                response.render('post',{locals:{user,posts,message}});
+                response.json({message:"Login Exitoso",state :true, user_id:userResult[0].id});
             }else{
-                response.render('index',{
-                    locals: {message:"'No existen coincidencias en la base de datos'"}
-                });
+                response.json({message:"Login Fallido",state :false});
             }
         }
       );

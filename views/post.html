@@ -10,18 +10,33 @@
     <title>Login</title>
     <script>
     window.onload = () =>{
-          var message = ${message}
-          console.log('El mensaje es :'+message)
-          if (message != ''){
-            document.getElementById('error').innerHTML = message
-          }else{
-            document.getElementById('error').setAttribute("hidden","hidden")
-          }
-          setTimeout(()=>{
-            document.getElementById('error').setAttribute("hidden","hidden")
-          },3000)
+       getUserData() 
           
-        }
+    }
+    const getUserData  = () =>{
+    id = document.getElementById('usuario').value
+    var url = '/';
+    var data = {usuario,password};
+
+    fetch(url, {
+      method: 'POST', 
+      body: JSON.stringify(data), 
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(response => {
+      message = response.message
+      state = response.state
+      validateLogin()
+      if(state){
+        setTimeout(()=>{
+      window.location = `/post?user_id=${response.user_id}`
+        },3000)
+      }
+    });
+
+  }
     </script>
     
   </head>
@@ -34,7 +49,7 @@
           </a>
           <span class="navbar-text">
             <!-- <img src = 'img/avatar.png' width="40" height="40"/> -->
-            <p>${user.name} ${user.lastname}</p>
+            <p id = "usuario"></p>
           </span>
         </div>
         
@@ -83,14 +98,14 @@
         <div class="card" >
             <div class="card-body">
                 <h5 class="card-title">Comments</h5>
-                <div class="row">
-                ${posts.map(post => `
+                <div class="row" id = "posts">
+                <!-- ${posts.map(post => `
                   <div class="col">${post.title}</div>
                   <div class="col">${post.fixedate}</div>
                   <div class="col">${post.email}</div>
                   <div class="col"><a href=${post.web} >WEB</a></a></div>
                   <p class="card-text">${post.comentario}</p>
-                `).join('')}
+                `).join('')} -->
               </div>
             </div>
         </div>

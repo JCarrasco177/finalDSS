@@ -17,6 +17,6 @@ router.post('/getuserbyid',users.getUserById)
 router.post('/login',users.setLogin)
 router.get('/avatar',users.getAvatar)
 //post controller
-router.post('/setpost',post.setPost)
+router.post('/userPost',post.userPost)
 
 module.exports = router;

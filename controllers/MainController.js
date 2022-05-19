@@ -2,14 +2,13 @@ const utils = require('../resources/utils')
 const moment = require('moment')
 
 const getIndex = (request,response) =>{
-    response.render('index', {locals:{message :'""'}});
+    response.render('index');
 }
 var posts = [
     ]
 
 const getPost = (request,response) =>{
-    
-    response.render('post',{locals:{posts}});
+    response.render('post');
 }
 
 const setPost = (request,response) =>{
@@ -21,7 +20,7 @@ const setPost = (request,response) =>{
         email: request.body.email,
     })
     
-    response.render('post',{locals:{posts}});
+    response.render('post');
 }
 
 module.exports = {

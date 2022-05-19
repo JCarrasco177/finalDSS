@@ -10,19 +10,53 @@
     <title>Hello, world!</title>
     <script>
       
-
+      var message = ''
+      var state =false
       window.onload = () =>{
-        var message = ${message.message}
+        validateLogin()
+        
+      }
+      const validateLogin = () => {
         console.log('El mensaje es :'+message)
-        if (message != ''){
-          document.getElementById('error').innerHTML = message
+        if (state){
+          document.getElementById('message').setAttribute('class','')
+          document.getElementById('message').classList.add('alert' ,'alert-success')
+          document.getElementById('message').innerHTML = message
+          document.getElementById('message').removeAttribute('hidden')
         }else{
-          document.getElementById('error').setAttribute("hidden","hidden")
+          document.getElementById('message').setAttribute('class','')
+          document.getElementById('message').classList.add('alert' ,'alert-danger')
+          document.getElementById('message').innerHTML = message
+          document.getElementById('message').removeAttribute('hidden')
         }
         setTimeout(()=>{
-          document.getElementById('error').setAttribute("hidden","hidden")
+          document.getElementById('message').setAttribute("hidden","hidden")
         },3000)
-        
+      }
+      const login  = () =>{
+        usuario = document.getElementById('usuario').value
+        password = document.getElementById('password').value
+        var url = '/login';
+        var data = {usuario,password};
+
+        fetch(url, {
+          method: 'POST', 
+          body: JSON.stringify(data), 
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }).then(res => res.json())
+        .then(response => {
+          message = response.message
+          state = response.state
+          validateLogin()
+          if(state){
+            setTimeout(()=>{
+          window.location = `/post?user_id=${response.user_id}`
+            },3000)
+          }
+        });
+
       }
     
     </script>
@@ -34,7 +68,7 @@
           Login
         </div>
           <div class="container">
-            <form method = "POST" action = "http://localhost:3000/login">
+            
               <div class="mb-3">
                 <label for="usuario" class="form-label">Usuario</label>
                 <input type="usuario" class="form-control" id="usuario" aria-describedby="usuario" name="usuario" required>
@@ -44,13 +78,13 @@
                 <input type="password" class="form-control" id="password" name="password" required>
               </div>
               
-              <button type="submit" class="btn btn-primary">Ingresar</button>
+              <button type="submit" class="btn btn-primary" onclick = "login()">Ingresar</button>
               
-              <div class="alert alert-danger" role="alert" id = "error">
+              <div class="alert alert-danger"  id = "message" hidden="hidden">
                 
               </div>
 
-            </form>
+        
         </div>
       </div>
         
