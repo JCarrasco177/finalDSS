@@ -18,5 +18,6 @@ router.post('/login',users.setLogin)
 router.get('/avatar',users.getAvatar)
 //post controller
 router.post('/userPost',post.userPost)
+router.post('/postComment',post.postComment)
 
 module.exports = router;
