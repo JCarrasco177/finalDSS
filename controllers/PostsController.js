@@ -29,7 +29,7 @@ const postComment = (request,response) => {
         message = err
         response.json({state:false,message})
       }else{
-        response.json({state:true,message:"Se insertó el comentatio"})
+        response.json({state:true,message:"Se insertó el comentario"})
       }
         
     }

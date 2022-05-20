@@ -1,7 +1,8 @@
-const forbidden = [
-    "parseInt", "document.write", "eval", "isNaN", "unescape", "escape",
-    "parseFloat", "parseInt", "eval", "isNaN", "onload", "alert", "script",
-    "<",  ">", "onload", "=", "(", ")", '"' ,"'" ,"/"]
+// const forbidden = [
+//     "parseInt", "document.write", "eval", "isNaN", "unescape", "escape",
+//     "parseFloat", "parseInt", "eval", "isNaN", "onload", "alert", "script",
+//     "<",  ">", "onload", "=", "(", ")", '"' ,"'" ,"/"]
+const forbidden = []   
 
 const getForbidden = () =>{
     return forbidden

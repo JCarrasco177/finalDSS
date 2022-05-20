@@ -39,9 +39,11 @@ const setLogin  = (request,response) =>{
         usuario: request.body.usuario,
         password: request.body.password
     })
+    console.log(`SELECT * FROM users where name ='${usuario.usuario}' and password = '${utils.btoa(usuario.password)}'`)
     connection.query(
-        'SELECT * FROM users where name ="'+usuario.usuario+'" and password = "'+utils.btoa(usuario.password)+'"',
+        `SELECT * FROM users where name ='${usuario.usuario}' and password = '${utils.btoa(usuario.password)}'`,
         function(err, userResult, fields) {
+            console.log(userResult)
              if(userResult.length >0){
                 const user = userResult[0]
                 response.json({message:"Login Exitoso",state :true, user_id:userResult[0].id});
