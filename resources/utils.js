@@ -26,13 +26,9 @@ const reemplazarTodos = (palabra,reemplazar) =>{
  const limpiarRequest = (data) =>{
     
     forbidden.forEach(word => {
-        var usuario = data.usuario
-        var password = data.password 
-        usuario = reemplazarTodos(usuario,word)
-        password = reemplazarTodos(password,word)
-        data = {
-            usuario,
-            password
+        let valores = Object.values(data); ;
+        for(let i=0; i< valores.length; i++){
+        valores[i] = reemplazarTodos(valores[i],word)
         }
     })
     return data

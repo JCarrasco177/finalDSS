@@ -35,13 +35,13 @@ const getUserById = (request,response)=>{
 
 }
 const setLogin  = (request,response) =>{
-    const usuario = utils.limpiarRequest({
-        usuario: request.body.usuario,
-        password: request.body.password
-    })
-    console.log(`SELECT * FROM users where name ='${usuario.usuario}' and password = '${utils.btoa(usuario.password)}'`)
+    const usuario = utils.limpiarRequest(request.body)
     connection.query(
-        `SELECT * FROM users where name ='${usuario.usuario}' and password = '${utils.btoa(usuario.password)}'`,
+        'SELECT * FROM users where name = ? and password = ?',
+        [
+            request.body.usuario,
+            utils.btoa(request.body.password)
+        ],
         function(err, userResult, fields) {
             console.log(userResult)
              if(userResult.length >0){
