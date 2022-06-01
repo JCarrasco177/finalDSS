@@ -1,0 +1,5 @@
+intalar jsonwebtoken
+instalar dotenv
+instalar nodemon 
+crear middleware
+preparar .env
