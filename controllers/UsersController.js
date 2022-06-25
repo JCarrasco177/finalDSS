@@ -1,5 +1,7 @@
 const connection = require('../config/db')
 const utils = require('../resources/utils')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 //const avatar = require('../resources/img/avatar')
 
 const testMysql = (request,response) =>{
@@ -43,10 +45,15 @@ const setLogin  = (request,response) =>{
             utils.btoa(request.body.password)
         ],
         function(err, userResult, fields) {
-            console.log(userResult)
              if(userResult.length >0){
                 const user = userResult[0]
-                response.json({message:"Login Exitoso",state :true, user_id:userResult[0].id});
+                const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+                response.json({
+                    message:"Login Exitoso",
+                    state :true, 
+                    user_id:userResult[0].id,
+                    token: accessToken
+                });
             }else{
                 response.json({message:"Login Fallido",state :false});
             }

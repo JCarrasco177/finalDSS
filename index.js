@@ -1,8 +1,8 @@
 const utils = require('./resources/utils');
 const express = require('express')
 const app = express()
-const morgan=require('morgan')
-app.use(morgan('dev'))
+// const morgan=require('morgan')
+// app.use(morgan('dev'))
 const router = require('./routes/main');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
